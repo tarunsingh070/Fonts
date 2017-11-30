@@ -74,4 +74,28 @@ class RootViewController: UITableViewController {
             return tableView.dequeueReusableCell(withIdentifier: RootViewController.favouritesCell, for: indexPath)
         }
     }
+    
+    // Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new View Controller using [segue destinatonViewController].
+        // Pass the selected object to the new view controller.
+        let indexPath = tableView.indexPath(for: sender as! UITableViewCell)!
+        let listVC = segue.destination as! FontListViewController
+        
+        if indexPath.section == 0 {
+            // Font names list
+            let familyName = familyNames[indexPath.row]
+            listVC.fontNames = (UIFont.fontNames(forFamilyName: familyName) as [String]).sorted()
+            listVC.navigationItem.title = familyName
+            listVC.showsFavourites = false
+        } else {
+            // Favourites list
+            listVC.fontNames = favouritesList.favourites
+            listVC.navigationItem.title = "Favourites"
+            listVC.showsFavourites = true
+        }
+        
+        
+    }
 }
