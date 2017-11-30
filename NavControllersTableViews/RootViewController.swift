@@ -95,7 +95,5 @@ class RootViewController: UITableViewController {
             listVC.navigationItem.title = "Favourites"
             listVC.showsFavourites = true
         }
-        
-        
     }
 }
